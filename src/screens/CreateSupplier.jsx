@@ -21,7 +21,7 @@ const CreateSupplier = () => {
         }
       );
       toast.success("Fornecedor criado com sucesso!");
-      navigate("/suppliers"); // Redireciona para a lista de fornecedores após a criação
+      navigate("/suppliers"); 
     } catch (error) {
       console.error("Erro ao criar fornecedor:", error);
       toast.error("Erro ao criar fornecedor.");

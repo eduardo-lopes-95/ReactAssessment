@@ -50,7 +50,6 @@ const Sidebar = () => {
         {expanded && <span>Profile</span>}
       </Link>
 
-      {/* Seção Produtos com submenu expansível */}
       <div className="w-full">
         <div
           className="w-full p-4 text-white text-lg flex items-center justify-between hover:bg-gray-700 border-b border-gray-600 cursor-pointer"
@@ -84,10 +83,10 @@ const Sidebar = () => {
               <span>Criar Produto</span>
             </Link>
             <Link
-              to="/suppliers" // Novo link para Fornecedores
+              to="/suppliers"
               className="w-full p-4 text-white text-md flex items-center hover:bg-gray-700 border-b border-gray-600"
             >
-              <FaBox className="mr-2" /> {/* Você pode usar um ícone diferente aqui */}
+              <FaBox className="mr-2" /> 
               <span>Fornecedores</span>
             </Link>
             <Link

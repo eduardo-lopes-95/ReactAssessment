@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ConfirmationModal from "../components/ConfirmationModal";
-import SupplierModal from "../components/SupplierModal"; // Importando o modal
+import SupplierModal from "../components/SupplierModal"; 
 
 const Suppliers = () => {
   const [suppliers, setSuppliers] = useState([]);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [supplierToDelete, setSupplierToDelete] = useState(null);
-  const [selectedSupplier, setSelectedSupplier] = useState(null); // Estado para o fornecedor selecionado
+  const [selectedSupplier, setSelectedSupplier] = useState(null); 
+  const navigate = useNavigate();  
 
   useEffect(() => {
     const fetchSuppliers = async () => {
@@ -53,9 +54,12 @@ const Suppliers = () => {
     }
   };
 
+  const handleEditSupplier = (supplier) => {
+    navigate(`/edit-supplier/${supplier._id}`, { state: { supplier } });
+  };
+
   const handleViewSupplier = (supplier) => {
-    setSelectedSupplier(supplier);
-    // Aqui, apenas abrir o modal de visualização
+    setSelectedSupplier(supplier); 
   };
 
   return (
@@ -80,9 +84,9 @@ const Suppliers = () => {
                   <button onClick={() => handleViewSupplier(supplier)} className="inline-block px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 mr-2">
                     Visualizar
                   </button>
-                  <Link to={`/edit-supplier/${supplier._id}`} className="inline-block px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 mr-2">
+                  <button onClick={() => handleEditSupplier(supplier)} className="inline-block px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 mr-2">
                     Editar
-                  </Link>
+                  </button>
                   <button onClick={() => openConfirmationModal(supplier)} className="inline-block px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">
                     Excluir
                   </button>

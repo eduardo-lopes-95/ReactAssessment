@@ -15,7 +15,7 @@ import ProductDetails from "./screens/ProductDetails";
 import Favorites from "./screens/Favorites";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./screens/Profile";
-import Suppliers from "./screens/Suppliers"; // Importando a nova página
+import Suppliers from "./screens/Suppliers";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,6 +23,8 @@ import Sidebar from "./components/Sidebar";
 import ForgotPassword from "./screens/ForgotPassword";
 import EditProduct from "./screens/EditProduct";
 import CreateSupplier from "./screens/CreateSupplier";
+import EditSupplier from "./screens/EditSupplier";
+
 const App = () => {
   const location = useLocation();
   const showSidebar = [
@@ -30,11 +32,14 @@ const App = () => {
     "/profile",
     "/products",
     "/favorites",
-    "/products/:id",
     "/create-product",
     "/suppliers",
     "/create-supplier",
-  ].some((path) => location.pathname.startsWith(path));
+  ].some((path) => location.pathname.startsWith(path)) ||
+    ["/products/", "/edit-product/", "/edit-supplier/"].some((dynamicPath) =>
+      location.pathname.match(new RegExp(`^${dynamicPath}`))
+    );
+  
 
   return (
     <div style={{ display: "flex" }}>
@@ -55,6 +60,7 @@ const App = () => {
             <Route path="/create-product" element={<CreateProduct />} />
             <Route path="/suppliers" element={<Suppliers />} />
             <Route path="/create-supplier" element={<CreateSupplier />} />
+            <Route path="/edit-supplier/:id" element={<EditSupplier />} />
           </Route>
         </Routes>
         <ToastContainer />

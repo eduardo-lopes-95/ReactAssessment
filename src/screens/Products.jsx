@@ -21,7 +21,6 @@ const Products = () => {
       const token = localStorage.getItem("authToken");
 
       try {
-        // Fetching Products
         const productsResponse = await axios.get(
           `https://api-infnet-produtos-privado.vercel.app/produtos`,
           {
@@ -30,7 +29,6 @@ const Products = () => {
         );
         setProducts((prevProducts) => [...prevProducts, ...productsResponse.data]);
 
-        // Fetching Fornecedores
         const fornecedoresResponse = await axios.get(
           `https://api-infnet-produtos-privado.vercel.app/fornecedores`,
           {
@@ -83,7 +81,6 @@ const Products = () => {
     }
   };
 
-  // Filtrar os produtos com base no termo de busca e fornecedor selecionado
   const filteredProducts = products.filter((product) => {
     const matchesSearchTerm = product.nome.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFornecedor = selectedFornecedor ? product.fornecedor === selectedFornecedor : true;
@@ -96,7 +93,6 @@ const Products = () => {
         Catálogo de Produtos
       </h1>
       <div className="flex justify-between mb-5">
-        {/* Campo de busca */}
         <input
           type="text"
           placeholder="Buscar produtos..."
@@ -105,7 +101,6 @@ const Products = () => {
           className="w-full p-3 text-base border border-gray-300 rounded-lg shadow-sm"
         />
 
-        {/* Seleção de fornecedor */}
         <select
           value={selectedFornecedor}
           onChange={(e) => setSelectedFornecedor(e.target.value)}
@@ -119,7 +114,6 @@ const Products = () => {
           ))}
         </select>
 
-        {/* Alternar modo de exibição */}
         <button
           onClick={() => setViewMode(viewMode === "grid" ? "list" : "grid")}
           className="ml-4 p-2 bg-blue-600 text-white rounded-lg"
@@ -128,7 +122,6 @@ const Products = () => {
         </button>
       </div>
 
-      {/* Lista de produtos */}
       <div
         className={
           viewMode === "grid"
@@ -172,7 +165,6 @@ const Products = () => {
               </div>
             </Link>
 
-            {/* Botões de Favorito e Excluir */}
             <button
               onClick={() => toggleFavorite(product)}
               className="bg-blue-600 text-white rounded-lg py-2 px-3 text-sm mt-4 mx-auto block hover:bg-blue-700 mb-4"
@@ -192,7 +184,6 @@ const Products = () => {
         ))}
       </div>
 
-      {/* Botão de carregar mais */}
       <button
         onClick={() => setSkip(skip + 10)}
         className="bg-blue-600 text-white rounded-lg py-3 px-6 mt-8 mx-auto block hover:bg-blue-700"
@@ -200,7 +191,6 @@ const Products = () => {
         Carregar Mais
       </button>
 
-      {/* Modal de confirmação de exclusão */}
       <ConfirmationModal isOpen={isModalOpen} onClose={closeModal} onConfirm={handleDelete} />
     </div>
   );

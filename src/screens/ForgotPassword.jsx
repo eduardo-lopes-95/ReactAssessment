@@ -1,67 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { toast } from "react-toastify";
-
-const Container = styled.div`
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: "Arial", sans-serif;
-`;
-
-const Title = styled.h2`
-  color: #2c3e50;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: 1rem;
-`;
-
-const Label = styled.label`
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: #34495e;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #bdc3c7;
-  border-radius: 4px;
-  transition: border-color 0.3s ease;
-
-  &:focus {
-    outline: none;
-    border-color: #3498db;
-  }
-`;
-
-const SubmitButton = styled.button`
-  background-color: #3498db;
-  color: white;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #2980b9;
-  }
-`;
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -73,22 +11,28 @@ const ForgotPassword = () => {
   };
 
   return (
-    <Container>
-      <Title>Recuperação de Senha</Title>
-      <Form onSubmit={handleSubmit}>
-        <FormGroup>
-          <Label htmlFor="email">Email:</Label>
-          <Input
+    <div className="max-w-md mx-auto mt-8 p-8 bg-gray-100 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Recuperação de Senha</h2>
+      <form onSubmit={handleSubmit} className="flex flex-col">
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-gray-700 mb-2">Email:</label>
+          <input
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
           />
-        </FormGroup>
-        <SubmitButton type="submit">Enviar Link de Redefinição</SubmitButton>
-      </Form>
-    </Container>
+        </div>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300"
+        >
+          Enviar Link de Redefinição
+        </button>
+      </form>
+    </div>
   );
 };
 

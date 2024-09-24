@@ -1,5 +1,4 @@
 import React from "react";
-import Sidebar from "../components/Sidebar";
 import NavMenu from "../components/NavMenu";
 
 function Home() {

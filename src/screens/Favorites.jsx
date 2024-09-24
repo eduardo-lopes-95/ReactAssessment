@@ -1,67 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import axios from "axios";
-
-const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 2rem auto;
-`;
-
-const Title = styled.h1`
-  color: #2c3e50;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-`;
-
-const ProductList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-`;
-
-const ProductItem = styled.li`
-  padding: 1rem;
-  background-color: #ecf0f1;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #dfe6e9;
-  }
-`;
-
-const ProductImage = styled.img`
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 4px;
-  margin-right: 1rem;
-`;
-
-const ProductDetails = styled.div`
-  flex-grow: 1;
-`;
-
-const ProductTitle = styled.p`
-  font-size: 1.2rem;
-  color: #34495e;
-  margin: 0;
-`;
-
-const NoFavoritesMessage = styled.p`
-  text-align: center;
-  color: #e74c3c;
-  font-size: 1rem;
-`;
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
@@ -96,25 +34,27 @@ const Favorites = () => {
   }, [favorites]);
 
   return (
-    <PageContainer>
-      <Title>Produtos Favoritos</Title>
-      <ProductList>
+    <div className="flex flex-col p-8 bg-gray-100 rounded-lg shadow-lg max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold text-gray-800 text-center mb-6">Produtos Favoritos</h1>
+      <ul>
         {favoriteProducts.length === 0 ? (
-          <NoFavoritesMessage>
-            Nenhum produto favorito encontrado.
-          </NoFavoritesMessage>
+          <p className="text-center text-red-500">Nenhum produto favorito encontrado.</p>
         ) : (
           favoriteProducts.map((product) => (
-            <ProductItem key={product.id}>
-              <ProductImage src={product.images[0]} alt={product.title} />
-              <ProductDetails>
-                <ProductTitle>{product.title}</ProductTitle>
-              </ProductDetails>
-            </ProductItem>
+            <li key={product.id} className="p-4 bg-gray-200 rounded-lg mb-4 flex items-center hover:bg-gray-300 transition duration-300">
+              <img
+                src={product.images[0]}
+                alt={product.title}
+                className="w-20 h-20 object-cover rounded-lg mr-4"
+              />
+              <div className="flex-grow">
+                <p className="text-lg font-medium text-gray-700">{product.title}</p>
+              </div>
+            </li>
           ))
         )}
-      </ProductList>
-    </PageContainer>
+      </ul>
+    </div>
   );
 };
 
